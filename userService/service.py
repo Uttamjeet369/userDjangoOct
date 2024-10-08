@@ -1,3 +1,5 @@
+from rest_framework_simplejwt.tokens import RefreshToken
+
 from userService.models import User, Role
 
 
@@ -14,5 +16,5 @@ def login_user(email, password):
     if not user.check_password(password):
         return None, Exception("invalid email or password")
 
-    token = user.generate_auth_token()
+    token = RefreshToken.for_user(user)
     return token, None
