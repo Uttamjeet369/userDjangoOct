@@ -1,6 +1,7 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from userService.models import User, Role
+from userService.producer import send_email_event
 
 
 def sign_up_user(email, password, name):
@@ -8,6 +9,16 @@ def sign_up_user(email, password, name):
     user.set_password(password)
     # user.roles.append(Role.objects.get(name='admin'))
     user.save()
+
+    user_email_data = {
+        'to': user.email,
+        'from': 'abc@gmail.com',
+        'subject': 'welcome',
+        'body': 'welcome {}'.format(name)
+    }
+    send_email_event(user_email_data)
+
+
     return user
 
 
