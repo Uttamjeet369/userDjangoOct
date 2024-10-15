@@ -16,7 +16,7 @@ class Role(models.Model):
     name = models.CharField(max_length=50)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)

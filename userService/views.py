@@ -51,3 +51,22 @@ def login(request):
 @permission_classes([IsAuthenticated])
 def sayHello(request):
     return JsonResponse({'hello': 'world'}, status=200)
+
+
+
+# Case 1
+# 1. Scaler server -> user service data (gmail) -> popup -> allowed -> return token(1) to client..
+#
+# 2. client sent back token (gmail) in api call to get user info.
+#
+# 3. scaler server generate own token(2) and return to frontend...
+#
+# 4. frontend want to access dashboard of scaler server...
+
+
+# CASE 2: access resources:
+# 1. Product service -> user service data  -> popup -> allowed -> return token to client..
+#
+# 2. store token(1) in db.
+#
+# 3. make api call to gmail server to read email using token(1)

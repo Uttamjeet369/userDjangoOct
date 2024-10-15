@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.decorators.csrf import csrf_exempt
 
+from oauth2_provider.views import TokenView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userService.urls')),
+    path('o/', include('oauth2_provider.urls')),
+    path('o/token/', csrf_exempt(TokenView.as_view()))
 ]
